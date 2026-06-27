@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SuccessPresenter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.view.start.success_create</a>
+</div>
+
+<h1>Coverage Summary for Class: SuccessPresenter (gr.softeng.team19.view.start.success_create)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SuccessPresenter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.view.start.success_create;
+&nbsp;
+&nbsp;/**
+&nbsp; * Presenter class that manages the &quot;Success&quot; screen logic.
+&nbsp; * It ensures the right message is shown and handles the move back to the login page.
+&nbsp; */
+&nbsp;public class SuccessPresenter {
+&nbsp;    private SuccessView view;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor that connects the presenter with the success screen UI.
+&nbsp;     * @param view The UI interface for the success screen.
+&nbsp;     */
+<b class="fc">&nbsp;    public SuccessPresenter(SuccessView view) {</b>
+<b class="fc">&nbsp;        this.view = view;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called when the screen opens to display the confirmation message.
+&nbsp;     * @param message The text to show (e.g., &quot;Driver account created successfully&quot;).
+&nbsp;     */
+&nbsp;    public void onViewCreated(String message) {
+&nbsp;        // Only update the text if a message was actually sent to this screen
+<b class="fc">&nbsp;        if (message != null &amp;&amp; !message.isEmpty()) {</b>
+<b class="fc">&nbsp;            view.setSuccessMessage(message);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handles the logic when the user clicks the &quot;Go to Login&quot; button.
+&nbsp;     */
+&nbsp;    public void onLoginPressed() {
+<b class="fc">&nbsp;        view.navigateToLogin();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-14 04:24</div>
+</div>
+</body>
+</html>

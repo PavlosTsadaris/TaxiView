@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>575</y>
+      <w>165</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>EvaluationView
+--
++ getRatings(): ArrayList&lt;Integer&gt;
++ getComment(): String
++ setDriverName(name: String): void
++ setCarInfo(info: String): void
++ setCustomerName(name: String): void
++ setBookingDetails(details: String): void
++ showError(message: String): void
++ navigateToRideTracking(bookingID: String): void
++ navigateToBookingScreen(): void
++ areRatingsValid(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>575</x>
+      <y>290</y>
+      <w>165</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>EvaluationActivity
+--
+- presenter: EvaluationPresenter
+- tvDriverName: TextView
+- tvCarInfo: TextView
+- tvCustomerName: TextView
+- tvBookingDetails: TextView
+- rbBehavior: RatingBar
+- rbVehicle: RatingBar
+- rbSpeed: RatingBar
+- etComment: EditText
+- btnCancel: MaterialButton
+- btnSubmitRating: MaterialButton
+--
+# onCreate(savedInstanceState: Bundle): void
++ getRatings(): ArrayList&lt;Integer&gt;
++ getComment(): String
++ setDriverName(name: String): void
++ setCarInfo(info: String): void
++ setCustomerName(name: String): void
++ setBookingDetails(details: String): void
++ showError(message: String): void
++ navigateToRideTracking(bookingID: String): void
++ navigateToBookingScreen(): void
++ areRatingsValid(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>485</y>
+      <w>205</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>EvaluationPresenter
+--
+- view: EvaluationView
+- currentBooking: TaxiBooking
+- bookingID: String
+- responseHandler: Handler
+--
++ EvaluationPresenter(view: EvaluationView, bookingID: String)
+- initializeView(): void
++ onSubmitRating(): void
++ onCancelRating(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>655</x>
+      <y>480</y>
+      <w>15</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>480</y>
+      <w>145</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;60.0;260.0;60.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>530</y>
+      <w>145</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>260.0;90.0;260.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>15</x>
+      <y>570</y>
+      <w>245</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>_DriverRating_
+--
+- serviceRatings: ArrayList&lt;Double&gt;
+- averageRating: Double
+- customerComment: String
+- ratingID: String
+- booking: TaxiBooking
+-
++ getRatingID: String
++ setRatingID(ratingID: String)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
++ getServiceRatings(): ArrayList&lt;Double&gt; {query}
++ addServiceRating(rating: Double)
++ getAverageRating(): Double
++ updateAverageRating()
++ getCustomerComment(): String {query}
++ setCustomerComment(customerComment: String)
++ fillDriverRating(costumerRatings: ArrayList&lt;Double&gt; ,comment: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>455</y>
+      <w>130</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;240.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>95</x>
+      <y>455</y>
+      <w>25</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>265</x>
+      <y>165</y>
+      <w>185</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>340.0;10.0;340.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>0</y>
+      <w>200</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>_TaxiDriver_
+--
+- averageRating: Double
+- availability: Boolean
+- requiredDocuments: ArrayList&lt;Document&gt;
+- vehicle: Vehicle
+-
++ getFullDetails():String «override»
++ addBooking(booking: TaxiBooking) «override»
++ updateBooking(booking: TaxiBooking) «override»
++ getAverageRating(): Double {query}
++ setAverageRating(averageRating: Double)
++ updateAverageRating(newAverageRating: double)
++ getDriverRatings(): Double {query}
++ setDriverRatings(driverRatings: Double)
++ getRequiredDocuments(): ArrayList&lt;Document&gt;   {query}
++ setNewDocument(document: Document)
++ getAvailability(): Boolean {query}
++ setAvailability(availability: Boolean)
++ acceptRequest(request:TaxiRideRequest): TaxiBooking
++ getVehicle(): Vehicle  {query}
++ setVehicle(vehicle: Vehicle)
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>265</x>
+      <y>330</y>
+      <w>105</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>300</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>_Customer_
+--
+- rideRequests: ArrayList&lt;TaxiRideRequest&gt;
+-
++ getRideRequests: ArrayList&lt;TaxiRideRequest&gt;
++ addRideRequest (request: TaxiRideRequest)
++ updateRideRequest: (request: TaxiRideRequest)
++ callTaxi(destinationAddress:Address): TaxiRideRequest
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>605</x>
+      <y>95</y>
+      <w>135</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>_Vehicle_
+--
+- vehicleID: String
+- lisencePlate: String
+- manufacturer: String
+- model: String
+- driver: TaxiDiver
+-
++ toString(): String
++ getVehicleID(): String {query}
++ setVehicleID(vehicleID: String )
++ getLisencePlate(): String {query}
++ setLisencePlate(lisencePlate: String)
++ getManufacturer(): String {query}
++ setManufacturer(manufacturer: String)
++ getModel(): String {query}
++ setModel(model: String)
++ getDriver(): TaxiDriver {query}
++ setDriver(driver: TaxiDriver)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>535</x>
+      <y>135</y>
+      <w>80</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>150</y>
+      <w>270</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>_TaxiBooking_
+--
+- bookingID: String
+- bookingTime: LocalTime
+- date: LocalDate
+- destination: Address
+- driverRating: DriverRating
+- pickupPoint: GPSLocation
+- status: String
++ payment: Payment
+- customer: Customer
+- taxiDriver: TaxiDriver
+- route: Route
+- rideRequest: TaxiRideRequest
+-
++ getBookingID(): String {query}
++ setBookingID(bookingID: String)
++ getRideRequest(): TaxiRideRequest {query}
++ setRideRequest(rideRequest: TaxiRideRiquest)
++ getRoute(): Route {query}
++ setRoute(route: Route)
++ getCustomer(): Customer
++ getTaxiDriver(): TaxiDriver
++ getBookingTime(): LocalTime {query}
++ setBookingTime(bookingTime: LocalTime)
++ getDate(): LocalDate {query}
++ setDate(date: LocalDate)
++ getDestination(): Address {query}
++ setDestination(destination: Address)
++ getDriverRating(): DriverRating
++ getStatus(): String   {query}
++ setStatus(status: Status) 
++ setDriverRating(driverRating:DriverRating) {query}
++ startRoute(): Route
++ endRoute(ongoingRoute: Route, latitude: Double, longitude: Double): Double
++ payRoute(amount: double, paymentType: PaymentMethod): Payment
++ createEvaluation(costumerRatings:ArrayList&lt;Integer&gt;, comment: String)
++ setEvaluation(evaluated: boolean)
++ isEvaluatied():boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

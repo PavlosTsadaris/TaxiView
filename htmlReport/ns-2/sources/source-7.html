@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GlobalID</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: GlobalID (gr.softeng.team19.domain)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GlobalID</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.7%
+  </span>
+  <span class="absValue">
+    (18/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.domain;
+&nbsp;
+<b class="nc">&nbsp;public class GlobalID {</b>
+<b class="fc">&nbsp;    private static int userID = 1;</b>
+<b class="fc">&nbsp;    private static int driverID = 1;</b>
+<b class="fc">&nbsp;    private static int taxiRideID = 1;</b>
+<b class="fc">&nbsp;    private static int vehicleID = 1;</b>
+<b class="fc">&nbsp;    private static int bookingID = 1;</b>
+<b class="fc">&nbsp;    private static int routeID = 1;</b>
+<b class="fc">&nbsp;    private static int paymentID = 1;</b>
+<b class="fc">&nbsp;    private static int ratingID = 1;</b>
+<b class="fc">&nbsp;    private static int documentID = 1;</b>
+&nbsp;
+&nbsp;    public static String getNextUserID() {
+<b class="fc">&nbsp;        return &quot;C&quot; + (++userID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextDriverID() {
+<b class="fc">&nbsp;        return &quot;D&quot; + (++driverID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextTaxiRideID() {
+<b class="fc">&nbsp;        return &quot;T&quot; + (++taxiRideID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextVehicleID() {
+<b class="fc">&nbsp;        return &quot;V&quot; + (++vehicleID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextBookingID() {
+<b class="fc">&nbsp;        return &quot;B&quot; + (++bookingID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextRouteID() {
+<b class="fc">&nbsp;        return &quot;R&quot; + (++routeID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextPaymentID() {
+<b class="fc">&nbsp;        return &quot;P&quot; + (++paymentID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextRatingID() {
+<b class="fc">&nbsp;        return &quot;RA&quot; + (++ratingID);</b>
+&nbsp;    }
+&nbsp;    public static String getNextDocumentID() {
+<b class="fc">&nbsp;        return &quot;D&quot; + (++documentID);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-12-10 06:57</div>
+</div>
+</body>
+</html>

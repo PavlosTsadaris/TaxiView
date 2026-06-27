@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChooseDestinationPresenter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.view.customer.bookride.destination</a>
+</div>
+
+<h1>Coverage Summary for Class: ChooseDestinationPresenter (gr.softeng.team19.view.customer.bookride.destination)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChooseDestinationPresenter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.view.customer.bookride.destination;
+&nbsp;
+&nbsp;import gr.softeng.team19.memorydao.MockRideData;
+&nbsp;
+&nbsp;/**
+&nbsp; * Presenter that manages picking a destination.
+&nbsp; * it connects the list of available locations to the UI and handles
+&nbsp; * what happens when a user clicks confirm or cancel.
+&nbsp; */
+&nbsp;public class ChooseDestinationPresenter {
+&nbsp;    private ChooseDestinationView view;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Connects the presenter to the destination selection screen.
+&nbsp;     * @param view The UI interface for the destination screen.
+&nbsp;     */
+<b class="fc">&nbsp;    public ChooseDestinationPresenter(ChooseDestinationView view) {</b>
+<b class="fc">&nbsp;        this.view = view;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gathers all location names from the database and tells the view to show them in a list.
+&nbsp;     */
+&nbsp;    public void showLocationSelectionDialog() {
+&nbsp;        // Create an array of names from our mock data
+<b class="fc">&nbsp;        String[] names = new String[MockRideData.LOCATIONS.size()];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; MockRideData.LOCATIONS.size(); i++) {</b>
+<b class="fc">&nbsp;            names[i] = MockRideData.LOCATIONS.get(i).name;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        view.showLocationDialog(names);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Called when the user clicks the confirm button.
+&nbsp;     * Moves the user to the next screen to find a driver.
+&nbsp;     * @param destinationName The name of the place the user wants to go.
+&nbsp;     */
+&nbsp;    public void onConfirmDestination(String destinationName) {
+<b class="fc">&nbsp;        view.navigateToDriverSelection(destinationName);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stops the booking process and returns the user to the home dashboard.
+&nbsp;     */
+&nbsp;    public void onCancelBooking() {
+<b class="fc">&nbsp;        view.navigateBackToHome();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Logic for when a user picks a specific place from the list.
+&nbsp;     * It updates the map marker, changes the address text, and enables the confirm button.
+&nbsp;     * @param which The position of the selected item in the list.
+&nbsp;     */
+&nbsp;    public void onChooseDestination(int which) {
+<b class="fc">&nbsp;        MockRideData.DemoLocation selectedLoc = MockRideData.LOCATIONS.get(which);</b>
+&nbsp;
+&nbsp;        // Update the UI with the new location data
+<b class="fc">&nbsp;        view.updateMapLocation(selectedLoc);</b>
+<b class="fc">&nbsp;        view.updateAddressText(selectedLoc.name);</b>
+<b class="fc">&nbsp;        view.setButtonEnabled(true);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-14 04:24</div>
+</div>
+</body>
+</html>

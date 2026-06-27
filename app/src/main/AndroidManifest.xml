@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Team19">
+        <activity
+            android:name=".view.rideRequests.RideRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ratings.RatingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.driver.payment.DriverPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.driver.TrackRide.TrackRideActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.evaluation.EvaluationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.driver.chooselocation.DriverChooseLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.bookride.trackdriver.TrackPickUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.driver.rideexecution.RideNavigationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.driver.riderequestsactivity.RideRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.bookride.searchride.BookRideActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.bookride.destination.ChooseDestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.viewmyprofile.MyProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.driver.homeactivity.HomeDriverActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.customer.homeactivity.HomeCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.start.success_create.SuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.start.driverdocs.DriverDocumentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.start.login.LoginMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.start.signup.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.start.welcome.WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.start.firstimage.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

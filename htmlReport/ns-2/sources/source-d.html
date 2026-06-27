@@ -1,0 +1,223 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TaxiDriver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: TaxiDriver (gr.softeng.team19.domain)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TaxiDriver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.6%
+  </span>
+  <span class="absValue">
+    (11/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (24/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.domain;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;public class TaxiDriver extends ApplicationUser {
+&nbsp;
+&nbsp;    private Double averageRating;
+&nbsp;    private Boolean availabity;
+&nbsp;    private ArrayList&lt;Document&gt; requiredDocuments;
+&nbsp;    private Vehicle vehicle;
+&nbsp;
+&nbsp;    public TaxiDriver(String userName, String password, String email, String name, String surname,
+&nbsp;            String phoneNumber, LocalDate birthDate,
+&nbsp;            String creditCardNumber, Double latitude, Double longitude, String street, String city, Integer streetNumber, Integer postalCode,
+&nbsp;             String licensePlate, String manufacturer, String model) {
+<b class="fc">&nbsp;        super(userName, password, email, name, surname, phoneNumber, birthDate, creditCardNumber,  latitude,</b>
+&nbsp;                longitude, street, city, streetNumber, postalCode);
+<b class="fc">&nbsp;        this.averageRating = 0.0;</b>
+<b class="fc">&nbsp;        this.availabity = true;</b>
+<b class="fc">&nbsp;        this.vehicle = new Vehicle(licensePlate, manufacturer, model);</b>
+<b class="fc">&nbsp;        this.requiredDocuments = new ArrayList&lt;&gt;(); </b>
+<b class="fc">&nbsp;        this.accountID = GlobalID.getNextDriverID();</b>
+<b class="fc">&nbsp;        Library.addUser(this); </b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getFullDetails() {
+<b class="fc">&nbsp;        return </b>
+&nbsp;            &quot;Average Rating: &quot; + averageRating + &quot;\n&quot; +
+&nbsp;            &quot;Availability: &quot; + availabity + &quot;\n&quot; +
+<b class="fc">&nbsp;            &quot;Vehicle: &quot; + vehicle.toString() + &quot;\n&quot; +</b>
+<b class="fc">&nbsp;            &quot;Required Documents: &quot; + requiredDocuments.toString() + &quot;\n&quot;</b>
+&nbsp;            ;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void addBooking(TaxiBooking booking) {
+<b class="fc">&nbsp;        super.addBooking(booking);</b>
+<b class="fc">&nbsp;       if (booking.getDriverRating() != null) {</b>
+<b class="fc">&nbsp;          updateAverageRating(booking.getDriverRating().getAverageRating());</b>
+&nbsp;       }
+&nbsp;       
+&nbsp;   }
+&nbsp;
+&nbsp;   @Override
+&nbsp;   public void updateBooking(TaxiBooking booking) {
+<b class="fc">&nbsp;       super.updateBooking(booking);</b>
+<b class="pc">&nbsp;        if (bookingHistory.contains(booking)) {</b>
+<b class="fc">&nbsp;            if (booking.getDriverRating() != null) {</b>
+<b class="fc">&nbsp;                updateAverageRating(booking.getDriverRating().getAverageRating());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;   }
+&nbsp;
+&nbsp;    public Double getAverageRating() {
+<b class="fc">&nbsp;        return averageRating;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAverageRating(Double averageRating) {
+<b class="nc">&nbsp;        this.averageRating = averageRating;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // public void updateAverageRating() {
+&nbsp;    //     averageRating = 0.0;
+&nbsp;    //     for (TaxiBooking booking : allDriverbookings) {
+&nbsp;    //         DriverRating rating = booking.getDriverRating();
+&nbsp;    //         if (rating != null) {
+&nbsp;    //             this.averageRating += rating.getAverageRating();
+&nbsp;    //         }
+&nbsp;    //     }
+&nbsp;    //     averageRating = averageRating / allDriverbookings.size();  
+&nbsp;    // }
+&nbsp;    
+&nbsp;
+&nbsp;    public void updateAverageRating( double newAverageRating) {
+<b class="fc">&nbsp;       averageRating = (averageRating * (bookingHistory.size()-1) +  newAverageRating) / bookingHistory.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp; 
+&nbsp;    public Boolean getAvailability() {
+<b class="fc">&nbsp;        return availabity;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public void setAvailability(Boolean availabity) {
+<b class="fc">&nbsp;        this.availabity = availabity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;   public Vehicle getVehicle() {
+<b class="fc">&nbsp;       return vehicle;</b>
+&nbsp;   }
+&nbsp;
+&nbsp;    public void setVehicle(Vehicle vehicle) {
+<b class="nc">&nbsp;         this.vehicle = vehicle;</b>
+&nbsp;    }
+&nbsp;   
+&nbsp;    public ArrayList&lt;Document&gt; getRequiredDocuments() {
+<b class="fc">&nbsp;        return requiredDocuments;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNewDocument(Document document) {
+<b class="fc">&nbsp;        this.requiredDocuments.add(document);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-12-10 06:57</div>
+</div>
+</body>
+</html>

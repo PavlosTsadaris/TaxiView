@@ -1,0 +1,301 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HomeDriverPresenter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.view.driver.homeactivity</a>
+</div>
+
+<h1>Coverage Summary for Class: HomeDriverPresenter (gr.softeng.team19.view.driver.homeactivity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HomeDriverPresenter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (35/35)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HomeDriverPresenter$Scheduler</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (35/35)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.view.driver.homeactivity;
+&nbsp;
+&nbsp;import android.os.Handler;
+&nbsp;import android.os.Looper;
+&nbsp;
+&nbsp;import gr.softeng.team19.domain.TaxiDriver;
+&nbsp;import gr.softeng.team19.memorydao.TaxiDriverDAOMemory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Presenter for the Driver Home Screen.
+&nbsp; * &lt;p&gt;
+&nbsp; * Rationalization: This class serves as the controller for the driver&#39;s landing page.
+&nbsp; * It manages the display of personal stats, coordinates availability status (Online/Offline),
+&nbsp; * and handles conditional navigation logic. It abstracts asynchronous tasks via a
+&nbsp; * {@link Scheduler} interface to ensure the code remains unit-testable.
+&nbsp; * &lt;/p&gt;
+&nbsp; */
+&nbsp;public class HomeDriverPresenter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Interface to abstract task scheduling.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Logic: This abstraction allows the Presenter to schedule delayed tasks (like notifications)
+&nbsp;     * without being strictly coupled to the Android {@link Handler}. During testing, a
+&nbsp;     * synchronous scheduler can be injected to bypass delays.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     */
+&nbsp;    public interface Scheduler {
+&nbsp;        /**
+&nbsp;         * Executes a task after a specified delay.
+&nbsp;         * @param task The {@link Runnable} containing the logic to be executed.
+&nbsp;         * @param delayMillis The delay duration in milliseconds.
+&nbsp;         */
+&nbsp;        void execute(Runnable task, long delayMillis);
+&nbsp;    }
+&nbsp;
+&nbsp;    private HomeDriverPresenter.Scheduler scheduler;
+&nbsp;    private HomeDriverView view;
+&nbsp;    private String currentUsername;
+<b class="fc">&nbsp;    private boolean isLocationActive = false;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default constructor for production use.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Initializes the scheduler using the real Android Main Looper to handle
+&nbsp;     * UI thread operations and delayed posts.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     * @param view The view interface implementation.
+&nbsp;     */
+<b class="fc">&nbsp;    public HomeDriverPresenter(HomeDriverView view) {</b>
+<b class="fc">&nbsp;        this.view = view;</b>
+<b class="fc">&nbsp;        this.scheduler = (task, delay) -&gt; new Handler(Looper.getMainLooper()).postDelayed(task, delay);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Overloaded constructor for Unit Testing (Dependency Injection).
+&nbsp;     * @param view The view stub for testing.
+&nbsp;     * @param testScheduler A custom scheduler to execute tasks synchronously during tests.
+&nbsp;     */
+<b class="fc">&nbsp;    public HomeDriverPresenter(HomeDriverView view, Scheduler testScheduler) {</b>
+<b class="fc">&nbsp;        this.view = view;</b>
+<b class="fc">&nbsp;        this.scheduler = testScheduler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Populates the Home Page with driver information upon loading.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Verification Logic: Fetches driver details from {@link TaxiDriverDAOMemory}.
+&nbsp;     * If the driver is found, it updates the view with the full name and a formatted
+&nbsp;     * rating string. If the user is missing, it reverts to guest/fallback info.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     * @param username The unique username of the authenticated driver.
+&nbsp;     */
+&nbsp;    public void onHomePageLoad(String username) {
+<b class="fc">&nbsp;        this.currentUsername = username;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (username == null) {</b>
+<b class="fc">&nbsp;            view.setWelcomeMessage(&quot;Guest Driver&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        TaxiDriverDAOMemory driverDAO = new TaxiDriverDAOMemory();</b>
+<b class="fc">&nbsp;        TaxiDriver driver = driverDAO.find(username);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (driver != null) {</b>
+<b class="fc">&nbsp;            view.setWelcomeMessage(driver.getName() + &quot; &quot; + driver.getSurname());</b>
+&nbsp;            // Formats the average rating to 1 decimal point (e.g., 4.5)
+<b class="fc">&nbsp;            String ratingStr = String.format(&quot;%.1f&quot;, driver.getAverageRating());</b>
+<b class="fc">&nbsp;            view.setRating(ratingStr);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            view.setWelcomeMessage(username);</b>
+<b class="fc">&nbsp;            view.setRating(&quot;0.0&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Manages the toggling of the driver&#39;s online/offline status.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Business Logic:
+&nbsp;     * 1. If the driver is going online, they are prompted to choose a location.
+&nbsp;     * 2. The availability state is toggled and persisted in the {@link TaxiDriver} domain model via DAO.
+&nbsp;     * 3. An asynchronous notification is scheduled to appear after 3 seconds,
+&nbsp;     * provided that the driver has remained online throughout the delay.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     */
+&nbsp;    public void onLocationToggleSelected() {
+<b class="fc">&nbsp;        if(!isLocationActive){</b>
+<b class="fc">&nbsp;            view.navigateToChooseLocation();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        isLocationActive = !isLocationActive;</b>
+&nbsp;
+&nbsp;        // Persist availability change in the Domain Model
+<b class="fc">&nbsp;        TaxiDriver driver = new TaxiDriverDAOMemory().find(currentUsername);</b>
+<b class="fc">&nbsp;        if (driver != null) {</b>
+<b class="fc">&nbsp;            driver.setAvailability(isLocationActive);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        view.updateLocationStatus(isLocationActive);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (isLocationActive) {</b>
+&nbsp;            // Schedule notification via the abstracted scheduler
+<b class="fc">&nbsp;            scheduler.execute(() -&gt; {</b>
+&nbsp;                // Verification: Re-check if the driver is still active before showing notification
+<b class="fc">&nbsp;                if (isLocationActive) {</b>
+<b class="fc">&nbsp;                    view.showRequestNotification(&quot;New requests found nearby!&quot;);</b>
+&nbsp;                }
+&nbsp;            }, 3000);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Triggers navigation to the Driver&#39;s Profile screen.
+&nbsp;     */
+&nbsp;    public void onProfileSelected() {
+<b class="fc">&nbsp;        view.navigateToProfile(currentUsername);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Triggers navigation to the Ride History screen.
+&nbsp;     */
+&nbsp;    public void onHistorySelected() {
+<b class="fc">&nbsp;        view.navigateToHistory();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handles navigation to the Request List screen.
+&nbsp;     * &lt;p&gt;
+&nbsp;     * Constraint Logic: Enforces the requirement that the driver must be
+&nbsp;     * Online (Location Active) to access and view incoming ride requests.
+&nbsp;     * &lt;/p&gt;
+&nbsp;     */
+&nbsp;    public void onRequestsListSelected() {
+<b class="fc">&nbsp;        if (isLocationActive) {</b>
+<b class="fc">&nbsp;            view.navigateToRequests();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            view.showErrorMessage(&quot;You must turn on location to receive requests!&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Triggers navigation to the Ratings and Feedback screen.
+&nbsp;     */
+&nbsp;    public void onRatingsSelected() {
+<b class="fc">&nbsp;        view.navigateToRatings();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-14 03:42</div>
+</div>
+</body>
+</html>

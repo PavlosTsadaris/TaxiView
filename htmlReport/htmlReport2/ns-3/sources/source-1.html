@@ -1,0 +1,492 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TrackPickUpPresenter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.view.customer.bookride.trackdriver</a>
+</div>
+
+<h1>Coverage Summary for Class: TrackPickUpPresenter (gr.softeng.team19.view.customer.bookride.trackdriver)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrackPickUpPresenter</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.2%
+  </span>
+  <span class="absValue">
+    (13/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (56/60)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrackPickUpPresenter$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackPickUpPresenter$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (11/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.5%
+  </span>
+  <span class="absValue">
+    (33/40)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackPickUpPresenter$Scheduler</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    65.2%
+  </span>
+  <span class="absValue">
+    (15/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (16/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.2%
+  </span>
+  <span class="absValue">
+    (89/107)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.view.customer.bookride.trackdriver;
+&nbsp;
+&nbsp;import android.os.Handler;
+&nbsp;import android.os.Looper;
+&nbsp;
+&nbsp;import gr.softeng.team19.dao.RouteDAO;
+&nbsp;import gr.softeng.team19.dao.TaxiBookingDAO;
+&nbsp;import gr.softeng.team19.domain.GPSLocation;
+&nbsp;import gr.softeng.team19.domain.Route;
+&nbsp;import gr.softeng.team19.domain.TaxiBooking;
+&nbsp;import gr.softeng.team19.memorydao.RouteDAOMemory;
+&nbsp;import gr.softeng.team19.memorydao.TaxiBookingDAOMemory;
+&nbsp;
+&nbsp;/**
+&nbsp; * Presenter for tracking driver pickup and ride progress simulation.
+&nbsp; */
+&nbsp;public class TrackPickUpPresenter {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Interface to abstract time-based operations for testability.
+&nbsp;     */
+&nbsp;    public interface Scheduler {
+&nbsp;        /**
+&nbsp;         * @param task The task to run.
+&nbsp;         * @param delayMillis Delay in milliseconds.
+&nbsp;         */
+&nbsp;        void execute(Runnable task, long delayMillis);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @param task The task to start immediately.
+&nbsp;         */
+&nbsp;        void executeRecurring(Runnable task);
+&nbsp;
+&nbsp;        /**
+&nbsp;         * @param task The task to remove from the queue.
+&nbsp;         */
+&nbsp;        void removeCallbacks(Runnable task);
+&nbsp;    }
+&nbsp;
+&nbsp;    private TrackPickUpView view;
+&nbsp;    private TaxiBookingDAO bookingDAO;
+&nbsp;    private TaxiBooking currentBooking;
+&nbsp;    private RouteDAO routeDao;
+&nbsp;    private Route route;
+&nbsp;    private Scheduler scheduler;
+&nbsp;    private Runnable simulationRunnable;
+<b class="fc">&nbsp;    private boolean pickup = false;</b>
+&nbsp;    private double mins;
+<b class="fc">&nbsp;    private boolean change = true;</b>
+<b class="fc">&nbsp;    private boolean skip = false;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Production constructor using real Android Handlers.
+&nbsp;     * @param view The view implementation.
+&nbsp;     * @param bookingID The identifier for the current booking.
+&nbsp;     */
+&nbsp;    public TrackPickUpPresenter(TrackPickUpView view, String bookingID) {
+<b class="nc">&nbsp;        this(view, bookingID, new Scheduler() {</b>
+&nbsp;            private Handler handler;
+&nbsp;
+&nbsp;            private Handler getHandler() {
+<b class="nc">&nbsp;                if (handler == null) {</b>
+<b class="nc">&nbsp;                    handler = new Handler(Looper.getMainLooper());</b>
+&nbsp;                }
+<b class="nc">&nbsp;                return handler;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void execute(Runnable task, long delayMillis) {
+<b class="nc">&nbsp;                getHandler().postDelayed(task, delayMillis);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void executeRecurring(Runnable task) {
+<b class="nc">&nbsp;                getHandler().post(task);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void removeCallbacks(Runnable task) {
+<b class="nc">&nbsp;                getHandler().removeCallbacks(task);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Test constructor for dependency injection.
+&nbsp;     * @param view The view implementation.
+&nbsp;     * @param bookingID The identifier for the current booking.
+&nbsp;     * @param scheduler The custom scheduler for timing control.
+&nbsp;     */
+<b class="fc">&nbsp;    public TrackPickUpPresenter(TrackPickUpView view, String bookingID, Scheduler scheduler) {</b>
+<b class="fc">&nbsp;        this.view = view;</b>
+<b class="fc">&nbsp;        this.scheduler = scheduler;</b>
+<b class="fc">&nbsp;        this.bookingDAO = new TaxiBookingDAOMemory();</b>
+<b class="fc">&nbsp;        this.currentBooking = bookingDAO.find(bookingID);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes the tracking view and starts the simulation logic.
+&nbsp;     */
+&nbsp;    public void startTracking() {
+<b class="fc">&nbsp;        if (currentBooking == null) {</b>
+<b class="fc">&nbsp;            view.showMessage(&quot;Error: Booking not found!&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        currentBooking.startRoute();</b>
+<b class="fc">&nbsp;        route = currentBooking.getRoute();</b>
+<b class="fc">&nbsp;        routeDao = new RouteDAOMemory();</b>
+<b class="fc">&nbsp;        routeDao.save(route);</b>
+&nbsp;
+<b class="fc">&nbsp;        view.setupDriverAndCustomerMarkers(</b>
+<b class="fc">&nbsp;                currentBooking.getTaxiDriver().getUserLocation().getPoint(),</b>
+<b class="fc">&nbsp;                currentBooking.getCustomer().getUserLocation().getPoint(),</b>
+<b class="fc">&nbsp;                currentBooking.getDestination().getPoint()</b>
+&nbsp;        );
+&nbsp;
+<b class="fc">&nbsp;        view.setDriverInfo(</b>
+<b class="fc">&nbsp;                currentBooking.getTaxiDriver().getName() + &quot; &quot; + currentBooking.getTaxiDriver().getSurname(),</b>
+<b class="fc">&nbsp;                currentBooking.getTaxiDriver().getVehicle().getManufacturer(),</b>
+<b class="fc">&nbsp;                currentBooking.getTaxiDriver().getVehicle().getLisencePlate(),</b>
+<b class="fc">&nbsp;                (double) Math.round(currentBooking.getTaxiDriver().getAverageRating() * 10) / 10.0</b>
+&nbsp;        );
+&nbsp;
+<b class="fc">&nbsp;        view.setStatus(&quot;Driver is on the way&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        int minutesAway = 5;</b>
+<b class="pc">&nbsp;        if (currentBooking.getPickupPoint() != null &amp;&amp; currentBooking.getTaxiDriver().getUserLocation() != null) {</b>
+<b class="fc">&nbsp;            double distanceKm = currentBooking.getTaxiDriver().getUserLocation().distanceTo(currentBooking.getPickupPoint());</b>
+<b class="fc">&nbsp;            minutesAway = (int) Math.max(1, Math.round(distanceKm * 2.1));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        view.setETA(&quot;Arriving in &quot; + minutesAway + &quot; min&quot;);</b>
+<b class="fc">&nbsp;        view.showSkip();</b>
+<b class="fc">&nbsp;        startMovementSimulation(currentBooking.getPickupPoint().getLatitude(), currentBooking.getPickupPoint().getLongitude(), &quot;Driver has arrived!&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Manages the iterative movement of the driver on the map.
+&nbsp;     * @param destinationLat target latitude.
+&nbsp;     * @param destinationLon target longitude.
+&nbsp;     * @param finalText status message upon arrival.
+&nbsp;     */
+&nbsp;    private void startMovementSimulation(double destinationLat, double destinationLon, String finalText) {
+<b class="fc">&nbsp;        simulationRunnable = new Runnable() {</b>
+<b class="fc">&nbsp;            double driverLat = currentBooking.getTaxiDriver().getUserLocation().getLatitude();</b>
+<b class="fc">&nbsp;            double driverLon = currentBooking.getTaxiDriver().getUserLocation().getLongitude();</b>
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void run() {
+<b class="pc">&nbsp;                if (skip) {</b>
+<b class="fc">&nbsp;                    driverLat = destinationLat;</b>
+<b class="fc">&nbsp;                    driverLon = destinationLon;</b>
+<b class="fc">&nbsp;                    view.hideSkip();</b>
+<b class="fc">&nbsp;                    skip = false;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                double stepLat = 0.0005;</b>
+<b class="fc">&nbsp;                double stepLon = 0.0003;</b>
+&nbsp;
+<b class="pc">&nbsp;                if (Math.abs(driverLat - destinationLat) &lt; stepLat) {</b>
+<b class="fc">&nbsp;                    driverLat = destinationLat;</b>
+<b class="nc">&nbsp;                } else if (driverLat &lt; destinationLat) {</b>
+<b class="nc">&nbsp;                    driverLat += stepLat;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    driverLat -= stepLat;</b>
+&nbsp;                }
+&nbsp;
+<b class="pc">&nbsp;                if (Math.abs(driverLon - destinationLon) &lt; stepLon) {</b>
+<b class="fc">&nbsp;                    driverLon = destinationLon;</b>
+<b class="nc">&nbsp;                } else if (driverLon &lt; destinationLon) {</b>
+<b class="nc">&nbsp;                    driverLon += stepLon;</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    driverLon -= stepLon;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                view.updateDriverLocationOnMap(driverLat, driverLon);</b>
+<b class="fc">&nbsp;                currentBooking.getTaxiDriver().setUserLocation(driverLat, driverLon);</b>
+&nbsp;
+<b class="fc">&nbsp;                GPSLocation destination = new GPSLocation(destinationLat, destinationLon);</b>
+<b class="fc">&nbsp;                double distanceKm = currentBooking.getTaxiDriver().getUserLocation().distanceTo(destination);</b>
+<b class="fc">&nbsp;                int remainingTime = (int) Math.max(1, Math.round(distanceKm * 2.1));</b>
+&nbsp;
+<b class="pc">&nbsp;                if (pickup &amp;&amp; change) {</b>
+<b class="fc">&nbsp;                    mins = remainingTime;</b>
+<b class="fc">&nbsp;                    change = false;</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                view.setETA(&quot;Arriving in &quot; + remainingTime + &quot; min&quot;);</b>
+&nbsp;
+<b class="pc">&nbsp;                if (distanceKm &lt; 0.36) {</b>
+<b class="fc">&nbsp;                    view.setETA(&quot;Arriving now...&quot;);</b>
+&nbsp;                }
+<b class="pc">&nbsp;                if (distanceKm == 0) {</b>
+<b class="fc">&nbsp;                    view.setETA(&quot;Arrived!&quot;);</b>
+<b class="fc">&nbsp;                    view.setStatus(finalText);</b>
+&nbsp;                }
+&nbsp;
+<b class="pc">&nbsp;                if (distanceKm &gt; 0.001) {</b>
+<b class="nc">&nbsp;                    scheduler.execute(this, 1500);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    if (!pickup) {</b>
+<b class="fc">&nbsp;                        pickup = true;</b>
+<b class="fc">&nbsp;                        driverArrived();</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        rideEnded();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        scheduler.executeRecurring(simulationRunnable);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates costs and navigates to payment after ride completion.
+&nbsp;     */
+&nbsp;    private void rideEnded() {
+<b class="fc">&nbsp;        currentBooking.endRoute(route, currentBooking.getDestination().getPoint().getLatitude(), currentBooking.getDestination().getPoint().getLongitude());</b>
+<b class="fc">&nbsp;        double amount = route.calculateCost(mins, route.getTotalDistance());</b>
+<b class="fc">&nbsp;        route.setTotalTime(mins);</b>
+&nbsp;
+<b class="fc">&nbsp;        view.setStatus(&quot;You have arrived at your destination!&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        scheduler.execute(() -&gt; {</b>
+<b class="fc">&nbsp;            view.navigateToPayment(amount, currentBooking);</b>
+&nbsp;        }, 1800);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Handles state transition once the driver reaches the customer.
+&nbsp;     */
+&nbsp;    private void driverArrived() {
+<b class="fc">&nbsp;        scheduler.execute(() -&gt; {</b>
+<b class="fc">&nbsp;            view.setETA(&quot;Wait for driver to start the ride...&quot;);</b>
+&nbsp;        }, 1000);
+&nbsp;
+<b class="fc">&nbsp;        scheduler.execute(() -&gt; {</b>
+<b class="fc">&nbsp;            view.setCallButtonOff();</b>
+<b class="fc">&nbsp;            view.setCancelButtonOff();</b>
+<b class="fc">&nbsp;            view.setStatus(&quot;The ride started...&quot;);</b>
+<b class="fc">&nbsp;            view.showSkip();</b>
+<b class="fc">&nbsp;            startMovementSimulation(currentBooking.getDestination().getPoint().getLatitude(), currentBooking.getDestination().getPoint().getLongitude(), &quot;Arrived at destination!&quot;);</b>
+&nbsp;        }, 2500);
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initiates a mock call to the driver.
+&nbsp;     */
+&nbsp;    public void onCallDriver() {
+<b class="pc">&nbsp;        if (currentBooking != null) {</b>
+<b class="fc">&nbsp;            view.showMessage(&quot;Calling &quot; + currentBooking.getTaxiDriver().getName() + &quot;...&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            view.showMessage(&quot;Calling Driver...&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Stops simulation and returns user to the home screen.
+&nbsp;     */
+&nbsp;    public void onCancelRide() {
+<b class="fc">&nbsp;        scheduler.removeCallbacks(simulationRunnable);</b>
+<b class="fc">&nbsp;        view.showMessage(&quot;Ride Cancelled&quot;);</b>
+<b class="fc">&nbsp;        view.navigateToHome(currentBooking.getCustomer().getUserName());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Triggers the review prompt UI.
+&nbsp;     */
+&nbsp;    public void onNotificationIcon(){
+<b class="fc">&nbsp;        view.showReviewPrompt(currentBooking);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Cleans up resources when the activity is destroyed.
+&nbsp;     */
+&nbsp;    public void onDestroy() {
+<b class="nc">&nbsp;        scheduler.removeCallbacks(simulationRunnable);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Navigates to the evaluation screen.
+&nbsp;     * @param booking The booking to review.
+&nbsp;     */
+&nbsp;    public void onReviewNow(TaxiBooking booking) {
+<b class="fc">&nbsp;        view.deleteReviewPrompt();</b>
+<b class="fc">&nbsp;        view.navigateToDriverEvaluation(booking);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Defers the evaluation to a later time.
+&nbsp;     * @param booking The booking to update.
+&nbsp;     */
+&nbsp;    public void onReviewLater(TaxiBooking booking) {
+<b class="nc">&nbsp;        booking.setEvaluated(false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Instantly finishes current movement segment.
+&nbsp;     */
+&nbsp;    public void onSkip() {
+<b class="fc">&nbsp;        skip = true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-01-14 04:24</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>804</x>
+      <y>294</y>
+      <w>186</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>PaymentActivity
+--
+- presenter: PaymentPresenter
+- tvBookingID: TextView
+- tvTimeStart: TextView
+- tvTimeEnd: TextView
+- tvDistance: TextView
+- txtTotalAmount: TextView
+- radioGroupPayment: RadioGroup
+- btnPayNow: MaterialButton
+- bankOverlay: View
+--
+# onCreate(savedInstanceState: Bundle): void
+- initViews(): void
++ displayBookingDetails(...): void
++ showCashPaymentPrompt(): void
++ showCardPaymentPrompt(): void
++ showSuccessPaymentPrompt(): void
++ showErrorPaymentPrompt(): void
++ showProcessing(message: String): void
++ showNewCardPrompt(): void
++ navigateToHome(booking: TaxiBooking): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>702</y>
+      <w>342</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>PaymentView
+--
++ displayBookingDetails(id: String, start: String, end: String, dist: double, amt: double): void
++ showCashPaymentPrompt(): void
++ showCardPaymentPrompt(): void
++ showSuccessPaymentPrompt(): void
++ showErrorPaymentPrompt(): void
++ showProcessing(message: String): void
++ showNewCardPrompt(): void
++ navigateToHome(booking: TaxiBooking): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>534</y>
+      <w>294</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>PaymentPresenter
+--
+- view: PaymentView
+- currentBooking: TaxiBooking
+- amount: double
+--
++ PaymentPresenter(view: PaymentView, bookingID: String, amount: double)
++ onConfirmClicked(method: PaymentMethod): void
++ onCashConfirmed(): void
++ onSavedCardConfirmed(): void
++ onNewCardConfirmed(number: String): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>660</y>
+      <w>234</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>_Payment_
+--
+- paymentID: String
+- amount: Double
+- dateTime: LocalDateTime
+- paymentType: PaymentType
+- status: String
+- booking: TaxiBooking
+-
++ toString(): String
++ getPaymentID(): String {query}
++ setPaymentID(paymentID: String)
++ getAmount(): Double {query}
++ setAmount(amount: Double)
++ getDateTime(): LocalDateTime {query}
++ setDateTime(dateTime: LocalDateTime)
++ getPaymentType(): PaymentMethod {query}
++ setPaymentType(type: PaymentMethod)
++ getStatus(): String {query}
++ setStatus(status: String)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>888</x>
+      <y>492</y>
+      <w>18</w>
+      <h>222</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;350.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>492</y>
+      <w>150</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;130.0;220.0;130.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>600</y>
+      <w>150</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>220.0;170.0;220.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>162</x>
+      <y>474</y>
+      <w>294</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0;470.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>168</x>
+      <y>588</y>
+      <w>288</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;20.0;460.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>438</x>
+      <y>132</y>
+      <w>324</w>
+      <h>282</h>
+    </coordinates>
+    <panel_attributes>_Route_
+--
+- routeID: String
+- totalDistance: Double
+- startTime: LocalTime
+- endTime: LocalTime
+- cost: Double
+- pickupPoint: GPSLocation
+- totalTime: Double
+- booking: TaxiBooking
+-
++ getRouteID(): String {query}
++ setRouteID(routeID: String)
++ getPickupPoint(): GPSLocation
++ getTotalDistance(): Double {query}
++ setTotalDistance(totalDistance: Double)
++ findTotalDistance(latitude: Double, longitude:Double): Double 
++ getTotalTime(): Double {query}
++ setTotalTime(totalTime: double)
++ findTotalTime(endTime: LocalTime, startTime: LocalTime): Double
++ getStartTime(): LocalTime {query}
++ setStartTime(startTime: LocalTime)
++ getEndTime(): LocalTime {query}
++ setEndTime(endTime: LocalTime)
++ getCost(): Double {query}
++ setCost(cost: Double)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
++ findRouteCost(endTime: LocalTime, latitude: Double, longitude: Double): Double
++ calculateCost(double totalTime: double, totalDistance: double): Double </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>438</y>
+      <w>228</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>_Customer_
+--
+- rideRequests: ArrayList&lt;TaxiRideRequest&gt;
+-
++ getRideRequests: ArrayList&lt;TaxiRideRequest&gt;
++ addRideRequest (request: TaxiRideRequest)
++ updateRideRequest: (request: TaxiRideRequest)
++ callTaxi(destinationAddress:Address): TaxiRideRequest
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>318</x>
+      <y>288</y>
+      <w>132</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>318</x>
+      <y>450</y>
+      <w>156</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=*</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>474</y>
+      <w>30</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;310.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>108</y>
+      <w>324</w>
+      <h>372</h>
+    </coordinates>
+    <panel_attributes>_TaxiBooking_
+--
+- bookingID: String
+- bookingTime: LocalTime
+- date: LocalDate
+- destination: Address
+- driverRating: DriverRating
+- pickupPoint: GPSLocation
+- status: String
++ payment: Payment
+- customer: Customer
+- taxiDriver: TaxiDriver
+- route: Route
+- rideRequest: TaxiRideRequest
+-
++ getBookingID(): String {query}
++ setBookingID(bookingID: String)
++ getRideRequest(): TaxiRideRequest {query}
++ setRideRequest(rideRequest: TaxiRideRiquest)
++ getRoute(): Route {query}
++ setRoute(route: Route)
++ getCustomer(): Customer
++ getTaxiDriver(): TaxiDriver
++ getBookingTime(): LocalTime {query}
++ setBookingTime(bookingTime: LocalTime)
++ getDate(): LocalDate {query}
++ setDate(date: LocalDate)
++ getDestination(): Address {query}
++ setDestination(destination: Address)
++ getDriverRating(): DriverRating
++ getStatus(): String   {query}
++ setStatus(status: Status) 
++ setDriverRating(driverRating:DriverRating) {query}
++ startRoute(): Route
++ endRoute(ongoingRoute: Route, latitude: Double, longitude: Double): Double
++ payRoute(amount: double, paymentType: PaymentMethod): Payment
++ createEvaluation(costumerRatings:ArrayList&lt;Integer&gt;, comment: String)
++ setEvaluation(evaluated: boolean)
++ isEvaluatied():boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

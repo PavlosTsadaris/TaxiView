@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <help_text>Space for diagram notes</help_text>
+  <zoom_level>4</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1244</x>
+      <y>268</y>
+      <w>144</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>_ApplicationUser_
+--
+- name: String
+- surname: String
+- phoneNumber:  String
+- birthDate: LocalDate
+- accountID: String
+- completedRides: Integer
+- creditCardNumber: String
+- numberOfRatings: Integer
+- address: Address
+
+
+# userLocation: GPSLocation
+# bookingHistory: ArrayList&lt;TaxiBooking&gt;
+# driverRatings: ArrayList&lt;DriverRating&gt;
+-
++ getFullDetails(): String
++ getBookingHistory(): ArrayList&lt;TaxiBooking&gt;  {query}
++ addBooking(taxiBooking: TaxiBooking)
++ updateBooking(booking: TaxiBooking)
++ getDriverRatings(): ArrayList&lt;DriverRating&gt;  {query}
++ addDriverRatings(driverRating: DriverRating)
++ updateDriverRatings(rating: DriverRating)
++ getAddress(): Address{query}
++ setAddress(address:Address)
++ getName(): String {query}
++ setName(name: String)
++ getSurname(): String {query}
++ setSurname(surname: String)
++ getPhoneNumber(): String {query}
++ setPhoneNumber(phoneNumber: String)
++ getBirthDate(): LocalDate {query}
++ setBirthDate(birthDate: LocalDate)
++ getAccountID(): String {query}
++ setAccountID(accountID: String)
++ getCompletedRides(): Integer {query}
++ setCompletedRides(completedRides: Integer)
++ getCreditCardNumber(): String {query}
++ setCreditCardNumber(creditCardNumber: String )
++ getNumberOfRatings(): Integer {query}
++ setNumberOfRatings(numberOfRatings: Integer)
++ getUserLocation(): GPSLocation
++ setUserLocation(latitude Double,longitude:Double)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1444</x>
+      <y>348</y>
+      <w>92</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>_User_
+--
+- userName: String
+- password: String
+- email: String
+-
++ getUserName(): String {query}
++ setUserName(userName: String)
++ getPassword(): String {query}
++ setPassword(password: String)
++ getEmail(): String {query}
++ setEmail(email: String)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1272</x>
+      <y>108</y>
+      <w>112</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>_Address_
+--
+- street: String
+- streetNumber: Integer
+- city: String
+- postalCode: Integer
+- point: GeoPoint
+-
++ toString(): String
++ getStreet(): String {query}  
++ setStreet(street: String)
++ getStreetNumber(): Integer {query}
++ setStreetNumber(streetNumber: Integer)
++ getCity(): String {query}
++ setCity(City: String)
++ getPostalCode(): Integer {query}
++ setPostalCode(postalCode: Integer)
++ getPoint(): GeoPoint
++ setPoint(point: Geopoint)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1576</x>
+      <y>360</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>_ManagementTeam_
+--
+-recoveryEmail: String
+-
++ getRecoveryEmail(): String {query}
++ setRecoveryEmail(recoveryEmail: String)
++ getStatistics(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>500</y>
+      <w>160</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>_TaxiDriver_
+--
+- averageRating: Double
+- availability: Boolean
+- requiredDocuments: ArrayList&lt;Document&gt;
+- vehicle: Vehicle
+-
++ getFullDetails():String «override»
++ addBooking(booking: TaxiBooking) «override»
++ updateBooking(booking: TaxiBooking) «override»
++ getAverageRating(): Double {query}
++ setAverageRating(averageRating: Double)
++ updateAverageRating(newAverageRating: double)
++ getDriverRatings(): Double {query}
++ setDriverRatings(driverRatings: Double)
++ getRequiredDocuments(): ArrayList&lt;Document&gt;   {query}
++ setNewDocument(document: Document)
++ getAvailability(): Boolean {query}
++ setAvailability(availability: Boolean)
++ acceptRequest(request:TaxiRideRequest): TaxiBooking
++ getVehicle(): Vehicle  {query}
++ setVehicle(vehicle: Vehicle)
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>936</x>
+      <y>340</y>
+      <w>156</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>_GPSLocation_
+--
+- detectionDateTime: LocalDateTime
+- latitude: Double
+- longitude: Double
+-
++ toString(): String
++ getDetectionDateTime(): LocalDateTime {query}
++ setDetectionDateTime(detectionDateTime: LocalDateTime)
++ getLatitude(): Double {query}
++ setLatitude(latitude: Double)
++ getLongitude(): Double {query}
++ setLongitude(longitude: Double) 
++ distanceTo(otherLocation:GPSLocation): Double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>752</x>
+      <y>352</y>
+      <w>140</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>_TaxiRideRequest_
+--
+- requestID: String
+- requestTime: LocalTime
+- date: LocalDate
+- destination: Address
+- pickupPoint: GPSLocation
+- status: String
+- customer: Customer
+- chosenDriver: TaxiDriver
+- availableDrivers: ArrayList&lt;TaxiDriver&gt;
+- booking: TaxiBooking
+-
++ getRequestID(): String {query}
++ setRequestID(requestID: String)
++ getRequestTime(): LocalTime {query}
++ setRequestTime(requestTime: LocalTime)
++ getDate(): LocalDate {query}
++ setDate(date: LocalDate)
++ getDestination(): Address {query}
++ setDestination(destination: Address) 
++ getPickUpPoint(): Address {query}
++ setPickUpPoint(pickUpPoint: Address)
++ getStatus(): String {query}
++ setStatus(status:String)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
++ getChosenDriver(): TaxiDriver
++ setChosenDriver(chosenDriver: TaxiDriver)
++ findAllDrivers(allDrivers:ArrayList&lt;TaxiDriver&gt;):
+ArrayList&lt;TaxiDriver&gt;
++ chooseTaxi(index: int): TaxiDriver
++ acceptRequest(taxiDriver: TaxiDriver): TaxiBooking
++ denyRequest()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>336</y>
+      <w>216</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>_TaxiBooking_
+--
+- bookingID: String
+- bookingTime: LocalTime
+- date: LocalDate
+- destination: Address
+- driverRating: DriverRating
+- pickupPoint: GPSLocation
+- status: String
++ payment: Payment
+- customer: Customer
+- taxiDriver: TaxiDriver
+- route: Route
+- rideRequest: TaxiRideRequest
+-
++ getBookingID(): String {query}
++ setBookingID(bookingID: String)
++ getRideRequest(): TaxiRideRequest {query}
++ setRideRequest(rideRequest: TaxiRideRiquest)
++ getRoute(): Route {query}
++ setRoute(route: Route)
++ getCustomer(): Customer
++ getTaxiDriver(): TaxiDriver
++ getBookingTime(): LocalTime {query}
++ setBookingTime(bookingTime: LocalTime)
++ getDate(): LocalDate {query}
++ setDate(date: LocalDate)
++ getDestination(): Address {query}
++ setDestination(destination: Address)
++ getDriverRating(): DriverRating
++ getStatus(): String   {query}
++ setStatus(status: Status) 
++ setDriverRating(driverRating:DriverRating) {query}
++ startRoute(): Route
++ endRoute(ongoingRoute: Route, latitude: Double, longitude: Double): Double
++ payRoute(amount: double, paymentType: PaymentMethod): Payment
++ createEvaluation(costumerRatings:ArrayList&lt;Integer&gt;, comment: String)
++ setEvaluation(evaluated: boolean)
++ isEvaluatied():boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>404</x>
+      <y>748</y>
+      <w>216</w>
+      <h>188</h>
+    </coordinates>
+    <panel_attributes>_Route_
+--
+- routeID: String
+- totalDistance: Double
+- startTime: LocalTime
+- endTime: LocalTime
+- cost: Double
+- pickupPoint: GPSLocation
+- totalTime: Double
+- booking: TaxiBooking
+-
++ getRouteID(): String {query}
++ setRouteID(routeID: String)
++ getPickupPoint(): GPSLocation
++ getTotalDistance(): Double {query}
++ setTotalDistance(totalDistance: Double)
++ findTotalDistance(latitude: Double, longitude:Double): Double 
++ getTotalTime(): Double {query}
++ setTotalTime(totalTime: double)
++ findTotalTime(endTime: LocalTime, startTime: LocalTime): Double
++ getStartTime(): LocalTime {query}
++ setStartTime(startTime: LocalTime)
++ getEndTime(): LocalTime {query}
++ setEndTime(endTime: LocalTime)
++ getCost(): Double {query}
++ setCost(cost: Double)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
++ findRouteCost(endTime: LocalTime, latitude: Double, longitude: Double): Double
++ calculateCost(double totalTime: double, totalDistance: double): Double </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>752</y>
+      <w>156</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>_Payment_
+--
+- paymentID: String
+- amount: Double
+- dateTime: LocalDateTime
+- paymentType: PaymentType
+- status: String
+- booking: TaxiBooking
+-
++ toString(): String
++ getPaymentID(): String {query}
++ setPaymentID(paymentID: String)
++ getAmount(): Double {query}
++ setAmount(amount: Double)
++ getDateTime(): LocalDateTime {query}
++ setDateTime(dateTime: LocalDateTime)
++ getPaymentType(): PaymentMethod {query}
++ setPaymentType(type: PaymentMethod)
++ getStatus(): String {query}
++ setStatus(status: String)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1052</x>
+      <y>692</y>
+      <w>108</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>_Vehicle_
+--
+- vehicleID: String
+- lisencePlate: String
+- manufacturer: String
+- model: String
+- driver: TaxiDiver
+-
++ toString(): String
++ getVehicleID(): String {query}
++ setVehicleID(vehicleID: String )
++ getLisencePlate(): String {query}
++ setLisencePlate(lisencePlate: String)
++ getManufacturer(): String {query}
++ setManufacturer(manufacturer: String)
++ getModel(): String {query}
++ setModel(model: String)
++ getDriver(): TaxiDriver {query}
++ setDriver(driver: TaxiDriver)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1248</x>
+      <y>648</y>
+      <w>140</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>_Document_
+--
+- document: DocumentType
+- documentID: String
+- driver: TaxiDiver
+-
++ getDocumentID: String
++ setDocument(documentID: String)
++ toString(): String
++ getDocumentType(): DocumentType {query}
++ setDocumentType(documentType: DocumentType)
++ getDriver(): TaxiDriver {query}
++ setDriver(driver: TaxiDriver)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>752</y>
+      <w>84</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>«enumeration»
+_PaymentType_
+--
+ PayByCard
+ PayByCash</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1268</x>
+      <y>728</y>
+      <w>84</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>«enumeration»
+_DocumentType_
+--
+DrivingLicense
+IDCard
+VehicleRegistration
+ProfessionalTaxiDriverLicense
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>196</y>
+      <w>152</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>_Customer_
+--
+- rideRequests: ArrayList&lt;TaxiRideRequest&gt;
+-
++ getRideRequests: ArrayList&lt;TaxiRideRequest&gt;
++ addRideRequest (request: TaxiRideRequest)
++ updateRideRequest: (request: TaxiRideRequest)
++ callTaxi(destinationAddress:Address): TaxiRideRequest
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1532</x>
+      <y>372</y>
+      <w>52</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1384</x>
+      <y>372</y>
+      <w>68</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1104</x>
+      <y>248</y>
+      <w>148</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>350.0;280.0;10.0;280.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1100</x>
+      <y>428</y>
+      <w>152</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>360.0;10.0;10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1096</x>
+      <y>632</y>
+      <w>16</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1316</x>
+      <y>220</y>
+      <w>16</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1176</x>
+      <y>564</y>
+      <w>140</w>
+      <h>92</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>330.0;210.0;330.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>888</x>
+      <y>436</y>
+      <w>140</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=*
+m2=*</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;270.0;330.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>472</x>
+      <y>388</y>
+      <w>288</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;700.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>580</y>
+      <w>128</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+m2=1</panel_attributes>
+    <additional_attributes>280.0;420.0;280.0;210.0;10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>184</x>
+      <y>580</y>
+      <w>160</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;430.0;10.0;200.0;370.0;200.0;370.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>472</x>
+      <y>444</y>
+      <w>268</w>
+      <h>276</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+
+m2= 1</panel_attributes>
+    <additional_attributes>650.0;660.0;410.0;660.0;400.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>472</x>
+      <y>408</y>
+      <w>552</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+      «create»</panel_attributes>
+    <additional_attributes>10.0;10.0;630.0;10.0;630.0;420.0;1360.0;420.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>580</y>
+      <w>108</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+«create»</panel_attributes>
+    <additional_attributes>250.0;420.0;250.0;240.0;10.0;240.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>224</x>
+      <y>580</y>
+      <w>144</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+«create»</panel_attributes>
+    <additional_attributes>10.0;430.0;10.0;240.0;340.0;240.0;340.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>472</x>
+      <y>424</y>
+      <w>268</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+«create»</panel_attributes>
+    <additional_attributes>650.0;610.0;490.0;610.0;490.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>836</x>
+      <y>248</y>
+      <w>228</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;260.0;10.0;160.0;540.0;160.0;540.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>212</y>
+      <w>212</w>
+      <h>148</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+ «create»</panel_attributes>
+    <additional_attributes>510.0;20.0;10.0;20.0;10.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1088</x>
+      <y>384</y>
+      <w>164</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;390.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>732</x>
+      <y>636</y>
+      <w>196</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>_DriverRating_
+--
+- serviceRatings: ArrayList&lt;Double&gt;
+- averageRating: Double
+- customerComment: String
+- ratingID: String
+- booking: TaxiBooking
+-
++ getRatingID: String
++ setRatingID(ratingID: String)
++ getBooking(): TaxiBooking {query}
++ setBooking (booking: TaxiBooking)
++ getServiceRatings(): ArrayList&lt;Double&gt; {query}
++ addServiceRating(rating: Double)
++ getAverageRating(): Double
++ updateAverageRating()
++ getCustomerComment(): String {query}
++ setCustomerComment(customerComment: String)
++ fillDriverRating(costumerRatings: ArrayList&lt;Double&gt; ,comment: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

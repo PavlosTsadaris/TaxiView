@@ -1,0 +1,60 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLActor</id><coordinates><x>36</x><y>186</y><w>36</w><h>66</h></coordinates><panel_attributes>Πελάτης</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>48</x><y>222</y><w>18</w><h>372</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;600</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>276</x><y>192</y><w>126</w><h>48</h></coordinates><panel_attributes>
+
+:RequestTaxiController</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>132</x><y>192</y><w>102</w><h>48</h></coordinates><panel_attributes>
+
+:RequestTaxiUI</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>174</x><y>234</y><w>18</w><h>36</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>234</y><w>18</w><h>60</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Text</id><coordinates><x>210</x><y>192</y><w>24</w><h>24</h></coordinates><panel_attributes>// Boundary Element
+	
+customelement=
+// Boundary Symbol
+drawCircle(20, 20, 8)
+drawLine(5, 20, 12, 20)
+drawLine(5, 30, 5, 10)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>378</x><y>192</y><w>24</w><h>24</h></coordinates><panel_attributes>// Control Element
+customelement=
+// Control Symbol
+drawCircle(20, 20, 8)
+drawLine(17, 13, 23, 8)
+drawLine(17, 13, 23, 17)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>852</x><y>180</y><w>48</w><h>48</h></coordinates><panel_attributes>// Entity Element
+customelement=
+// Entity Symbol
+drawCircle(50, 50, 10)
+drawLine(40, 60, 60, 60)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>456</x><y>192</y><w>120</w><h>48</h></coordinates><panel_attributes>
+
+GPS-Τοποθεσία</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>624</x><y>192</y><w>114</w><h>48</h></coordinates><panel_attributes>
+
+Αίτημα Κλήσης Ταξί</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>234</y><w>18</w><h>72</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>678</x><y>234</y><w>18</w><h>162</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;250</additional_attributes></element><element><id>Text</id><coordinates><x>534</x><y>174</y><w>42</w><h>42</h></coordinates><panel_attributes>// Entity Element
+customelement=
+// Entity Symbol
+drawCircle(50, 50, 10)
+drawLine(40, 60, 60, 60)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>696</x><y>174</y><w>48</w><h>48</h></coordinates><panel_attributes>// Entity Element
+customelement=
+// Entity Symbol
+drawCircle(50, 50, 10)
+drawLine(40, 60, 60, 60)
+	</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>276</y><w>168</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2=                    requestaTaxiSearch()</panel_attributes><additional_attributes>260;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>288</y><w>180</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2=                             getCustomerLocation()</panel_attributes><additional_attributes>280;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>324</y><w>180</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
+customerLocation</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>336</y><w>168</w><h>36</h></coordinates><panel_attributes>lt=&lt;-
+displayLocation(customerLocation)
+
+</panel_attributes><additional_attributes>10;20;260;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>174</x><y>258</y><w>12</w><h>300</h></coordinates><panel_attributes>bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>372</y><w>168</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2=   comfirmLocation(customerLocation)</panel_attributes><additional_attributes>260;10;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>336</x><y>282</y><w>12</w><h>66</h></coordinates><panel_attributes>
+bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>510</x><y>294</y><w>12</w><h>42</h></coordinates><panel_attributes>
+bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>342</y><w>18</w><h>48</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>336</x><y>378</y><w>12</w><h>162</h></coordinates><panel_attributes>
+bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>378</y><w>348</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2=                                                                                                  createRequest(customerLocation)</panel_attributes><additional_attributes>560;10;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>678</x><y>384</y><w>12</w><h>60</h></coordinates><panel_attributes>
+bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>432</y><w>348</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+requestID</panel_attributes><additional_attributes>10;20;560;20</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>468</y><w>180</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2= findNearbyDrivers(customerLocation)</panel_attributes><additional_attributes>280;10;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>786</x><y>192</y><w>114</w><h>48</h></coordinates><panel_attributes>
+
+Οδηγός Ταξί</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>516</x><y>474</y><w>336</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2=              getDriverLocation()</panel_attributes><additional_attributes>540;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>234</y><w>18</w><h>258</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;410</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>840</x><y>480</y><w>12</w><h>48</h></coordinates><panel_attributes>
+bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>516</x><y>516</y><w>336</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+driverLocation</panel_attributes><additional_attributes>10;20;540;20</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>522</y><w>180</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+ListOfDrivers</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>528</y><w>168</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
+showListOfDrivers()</panel_attributes><additional_attributes>10;20;260;20</additional_attributes></element><element><id>Relation</id><coordinates><x>174</x><y>552</y><w>18</w><h>42</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>534</y><w>18</w><h>60</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>330</y><w>18</w><h>156</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;240</additional_attributes></element><element><id>Relation</id><coordinates><x>678</x><y>438</y><w>18</w><h>156</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;240</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>522</y><w>18</w><h>72</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>48</x><y>360</y><w>138</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+m2=           verifyLocation()
+</panel_attributes><additional_attributes>210;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>510</x><y>474</y><w>12</w><h>60</h></coordinates><panel_attributes>bg=gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>528</y><w>18</w><h>66</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element></diagram>

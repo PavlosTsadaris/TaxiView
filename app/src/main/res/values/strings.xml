@@ -1,0 +1,234 @@
+<resources>
+    <!-- Strings -->
+    <string name="app_name">TaxiView</string>
+    <string name="app_logo_name">TaxiVie</string>
+    <string name="app_logo_text">W</string>
+
+    <!-- Welcome -->
+    <string name="welcome_message">Welcome !</string>
+    <string name="btn_create_account">Create Account</string>
+    <string name="btn_login">Login</string>
+
+    <!-- Login -->
+    <string name="welcome_back">Welcome back!</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="new_user_link">New user? Sign Up</string>
+
+    <!-- Sign Up -->
+    <string name="title_create_account">Create Account</string>
+    <string name="subtitle_account_details">Account Details</string>
+    <string name="hint_email">Email</string>
+    <string name="subtitle_personal_details">Personal Details</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_birthdate">Birth Date (DD/MM/YYYY)</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_credit_card">Credit Card Number</string>
+    <string name="label_i_am_a">I am a:</string>
+    <string name="radio_customer">Customer</string>
+    <string name="radio_driver">Driver</string>
+    <string name="btn_next_step">NEXT STEP</string>
+    <string name="btn_complete_registration">Complete Registration</string>
+    <string name="already_have_account">Already Have Account? Login</string>
+    <string name="hint_street">Street Name</string>
+    <string name="hint_number">No.</string>
+    <string name="hint_postal_code">Postal Code</string>
+    <string name="hint_city">City</string>
+    <string name="hint_card_number">Card Number</string>
+
+    <!-- Driver Documents -->
+    <string name="title_driver_documents">Driver Documents</string>
+    <string name="subtitle_documents_desc">Please upload the required documents to verify your account.</string>
+    <string name="doc_license">1. Driving License</string>
+    <string name="doc_id">2. ID Card</string>
+    <string name="doc_vehicle_reg">3. Vehicle Registration</string>
+    <string name="doc_taxi_license">4. Professional Taxi License</string>
+    <string name="btn_upload_photo">Upload Photo</string>
+    <string name="btn_uploaded">Uploaded ✔</string>
+    <string name="btn_submit_review">SUBMIT FOR REVIEW</string>
+    <string name="hint_manufacturer">Manufacturer (e.g. Toyota)</string>
+    <string name="hint_model">Model (e.g. Prius)</string>
+    <string name="hint_license_plate">License Plate (e.g. ABC-1234)</string>
+    <string name="header_vehicle_details">Vehicle Details</string>
+
+    <!-- Success -->
+    <string name="success_title">Success!</string>
+    <string name="btn_go_to_login">GO TO LOGIN</string>
+
+    <string name="msg_driver_success">Documents Submitted!\nYour account is under review.</string>
+    <string name="msg_customer_success">Registration Successful!\nYou are ready to go.</string>
+
+
+    <!-- Errors -->
+    <string name="error_username_required">Username is required</string>
+    <string name="error_username_taken">"Username already exists"</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_email_required">Email is required</string>
+    <string name="error_email_invalid">Invalid Email (must contain \'@\')</string>
+    <string name="error_firstname_required">First Name is required</string>
+    <string name="error_lastname_required">Last Name is required</string>
+    <string name="error_phone_required">Phone is required</string>
+    <string name="error_phone_invalid">Phone must be exactly 10 digits</string>
+    <string name="error_date_required">Birth Date is required</string>
+    <string name="error_date_invalid">Date format must be DD/MM/YYYY</string>
+    <string name="error_address_required">Address is required</string>
+    <string name="error_card_required">Credit Card is required</string>
+    <string name="error_card_invalid">Card number must be 16 digits</string>
+    <string name="error_role_required">Please select a role</string>
+    <string name="error_username_exists">Username already exists</string>
+    <string name="error_upload_required">Please upload all required documents first.</string>
+    <string name="error_street_required">Street name is required.</string>
+    <string name="error_number_required">Street number is required.</string>
+    <string name="error_city_required">City is required.</string>
+    <string name="error_zip_required">Postal code is required.</string>
+    <string name="error_manufacturer_required">Manufacturer is required</string>
+    <string name="error_model_required">Model is required</string>
+    <string name="error_license_plate_required">License Plate is required</string>
+    <string name="error_empty_fields">Fill all fields</string>
+
+    <!-- Home -->
+    <string name="default_customer_name">Customer Name</string>
+    <string name="title_book_ride">Book a Ride</string>
+    <string name="desc_book_ride">Find a taxi near you</string>
+    <string name="section_services">Services</string>
+    <string name="title_my_profile">My Profile</string>
+    <string name="title_history">History</string>
+
+    <!--MyProfileView-->
+
+    <string name="title_my_profile_screen">My Profile</string>
+    <string name="label_username">Usename</string>
+    <string name="label_email">Email</string>
+    <string name="label_phone">Phone Number</string>
+    <string name="label_address">Address</string>
+    <string name="label_payment_card">Credit Card</string>
+    <string name="btn_logout">Log Out</string>
+
+    <string name="default_user_email">john@example.com</string>
+    <string name="default_user_phone">6900000000</string>
+
+    <!-- BookRideView -->
+    <string name="status_init_map">Initializing Map...</string>
+    <string name="status_locating">Finding your location via GPS...</string>
+    <string name="status_confirm">Is this your location?</string>
+    <string name="status_searching">Searching for nearby taxis...</string>
+    <string name="status_drivers_found">Drivers Found!</string>
+
+    <string name="address_placeholder">Please wait...</string>
+    <string name="address_default">Syntagma Square, Athens</string>
+
+    <string name="btn_confirm_location">Confirm Location</string>
+    <string name="btn_searching">Searching...</string>
+    <string name="btn_select_driver">Select a Driver</string>
+
+    <string name="msg_drivers_nearby">Active Drivers Nearby</string>
+    <string name="msg_driver_selection_soon">Driver selection coming soon!</string>
+
+    <!-- Driver Average Rating-->
+    <string name="TurnOnLocation">Turn ON Location</string>
+    <string name="TurnOffLocation">Turn OFF Location</string>
+    <string name="msg_online_driver">You are now ONLINE</string>
+    <string name="msg_offline_driver">You are now OFFLINE</string>
+    <string name="label_rating">Rating: </string>
+    <string name="default_rating">0.0</string>
+
+    <!-- Destination -->
+    <string name="cancel_book_ride">Cancel Book Ride</string>
+    <string name="confirm_destination">Confirm Destination</string>
+    <string name="change_destination">Change Destination</string>
+    <string name="select_destination">Select Destination...</string>
+    <string name="choose_your_destination">Choose your destination</string>
+    <string name="cancel_ride">Cancel Ride</string>
+    <string name="change_location">Change Location</string>
+    <string name="waiting_for_response">Waiting for response...</string>
+
+    <!-- Driver choose location -->
+    <string name="set_your_location">Set your location</string>
+    <string name="select_location">Select Location...</string>
+    <string name="edit_location">Edit Location</string>
+    <string name="go_online">Go Online</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_evaluation">Cancel Evaluation</string>
+    <string name="submit_review">Submit Your Review</string>
+    <string name="question_review">Do you want to make a review now?</string>
+
+
+    <!-- Driver Evaluation -->
+    <string name="error_all_ratings_required">Please rate all categories before submitting!</string>
+    <string name="navigating_to_customer">Navigating to Customer</string>
+
+
+    <!-- Track Pick Up -->
+    <string name="pickup_syntagma_square">Pickup: Syntagma Square</string>
+    <string name="select_customer">Select Customer</string>
+    <string name="end_ride">End Ride</string>
+    <string name="start_ride">Start Ride</string>
+    <string name="arrived_at_customer">Arrived at Customer</string>
+    <string name="heading_to_customer">Heading to Customer</string>
+
+    <!-- Payment -->
+    <string name="payment_method">Payment Method</string>
+    <string name="initial_zero_amount">€ 0.00</string>
+    <string name="saved_card_bank_transfer">Saved Card (Bank Transfer)</string>
+    <string name="new_card_bank_transfer">New Card (Bank Transfer)</string>
+    <string name="cash">Cash</string>
+    <string name="total_distance_0_0_km">Total Distance: 0.0 km</string>
+    <string name="start_time">StartTime: --:-- - --:--</string>
+    <string name="end_time">EndTime: --:-- - --:--</string>
+    <string name="booking_id">Booking ID: #----</string>
+    <string name="ride_details">Ride Details</string>
+    <string name="payment">Payment</string>
+    <string name="payment_by_cash">Payment by Cash</string>
+    <string name="please_make_the_payment_directly_to_the_driver">Please make the payment directly to the Driver!</string>
+    <string name="back">BACK</string>
+    <string name="ok">OK</string>
+    <string name="payment_by_card">Payment By Card</string>
+    <string name="please_choose_card">Please Choose a Card:</string>
+    <string name="new_card">Insert New Card</string>
+    <string name="saved_card">Use Saved Card</string>
+    <string name="card_bank_transfer">Card (Online Bank Tranfer)</string>
+    <string name="successful_payment">Successful Payment!</string>
+    <string name="connecting_with_bank">Connecting with bank...</string>
+    <string name="error_payment">Payment Failed!</string>
+    <string name="ride_completed">Ride Completed</string>
+
+    <!-- Driver Payment -->
+    <string name="customer">Customer</string>
+    <string name="john_doe">John Doe</string>
+    <string name="total_amount">TOTAL AMOUNT</string>
+    <string name="euro">€</string>
+    <string name="_00_00">00.00</string>
+    <string name="tap_amount_to_edit">Tap amount to edit</string>
+    <string name="confirm_payment">Confirm Payment</string>
+    <string name="wait_for_payment_to_be_completed">Wait for payment to be completed</string>
+
+    <!-- Evaluation -  History  -->
+    <string name="Destination">Destination</string>
+    <string name="pickup_location">Pickup location</string>
+    <string name="ride_history">Ride History</string>
+    <string name="total_amount_0_00">Total Amount: 0.00€</string>
+    <string name="id_0000">#ID-0000</string>
+    <string name="_12_jan_2026">12 Jan 2026</string>
+    <string name="rated">RATED</string>
+    <string name="pickup_location_rating">Pickup Location</string>
+    <string name="destination_name">Destination Name</string>
+    <string name="_4_3">(4.3)</string>
+    <string name="comment_goes_here">Comment goes here...</string>
+    <string name="leave_a_comment_optional">Leave a comment (optional)...</string>
+    <string name="speed_amp_efficiency"><![CDATA[Speed & Efficiency]]></string>
+    <string name="how_was_the_service">How was the service?</string>
+    <string name="driver_behavior">Driver Behavior</string>
+    <string name="date_amp_booking_id"><![CDATA[Date & Booking ID]]></string>
+    <string name="vehicle_info">Vehicle Info</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="passenger_loading">Passenger: Loading...</string>
+    <string name="rate_your_ride">Rate Your Ride</string>
+    <string name="vehicle_condition">Vehicle Condition</string>
+    <string name="booking_history">Booking History</string>
+    <string name="no_rides_yet">No rides yet</string>
+    <string name="error_street_number_required">Street number is required.</string>
+    <string name="error_postal_code_required">Postal code is required.</string>
+
+</resources>

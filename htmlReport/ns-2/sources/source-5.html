@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DriverRating</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">gr.softeng.team19.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: DriverRating (gr.softeng.team19.domain)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DriverRating</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package gr.softeng.team19.domain;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;public class DriverRating {
+&nbsp;    private ArrayList&lt;Integer&gt; serviceRatings;
+&nbsp;    private Double averageRating;
+&nbsp;    private String customerComment;
+&nbsp;    private String ratingID;
+&nbsp;
+&nbsp;    
+<b class="fc">&nbsp;    public DriverRating() {</b>
+<b class="fc">&nbsp;        this.serviceRatings = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.averageRating = 0.0;</b>
+<b class="fc">&nbsp;        this.customerComment = &quot;&quot;;</b>
+<b class="fc">&nbsp;        this.ratingID = GlobalID.getNextRatingID();</b>
+&nbsp;    }
+&nbsp;    public String getRatingID() {
+<b class="fc">&nbsp;        return ratingID;</b>
+&nbsp;    }
+&nbsp;    public void setRatingID(String ratingID) {
+<b class="fc">&nbsp;        this.ratingID = ratingID;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;Integer&gt; getServiceRatings() {
+<b class="fc">&nbsp;        return serviceRatings;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Boolean addServiceRating(Integer rating) {
+<b class="pc">&nbsp;        if (rating != null &amp;&amp; rating &gt;= 0 &amp;&amp; rating &lt;= 5) {</b>
+<b class="fc">&nbsp;            this.serviceRatings.add(rating);</b>
+<b class="fc">&nbsp;            updateAverageRating();</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Double getAverageRating() {
+<b class="fc">&nbsp;        return averageRating;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void updateAverageRating() {
+<b class="fc">&nbsp;        if (serviceRatings.isEmpty()) {</b>
+<b class="fc">&nbsp;            this.averageRating = 0.0;</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        Double sum = 0.0;</b>
+<b class="fc">&nbsp;        for (Integer rating : serviceRatings) {</b>
+<b class="fc">&nbsp;            sum += rating;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.averageRating = sum / serviceRatings.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getCustomerComment() {
+<b class="fc">&nbsp;        return customerComment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCustomerComment(String customerComment) {
+<b class="fc">&nbsp;        this.customerComment = customerComment;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void fillDriverRating(ArrayList&lt;Integer&gt; costumerRatings, String comment) {
+<b class="fc">&nbsp;        for (Integer rating : costumerRatings) {</b>
+&nbsp;
+<b class="fc">&nbsp;            addServiceRating(rating);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        setCustomerComment(comment);</b>
+<b class="fc">&nbsp;        updateAverageRating();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-12-10 06:57</div>
+</div>
+</body>
+</html>
